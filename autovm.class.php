@@ -26,11 +26,13 @@ class Autovm
 
 	public function __construct($params)
 	{
-		$valid = preg_match('#(.*)\/api$#', $params['serverhostname']);
+		#$valid = preg_match('#(.*)\/api$#', $params['serverhostname']);
 
-		if (!$valid) {
-			$this->log('Please fix the autovm server url from whmcs admin area');
-		}
+		#if (!$valid) {
+		#	$this->log('Please fix the autovm server url from whmcs admin area');
+		#}
+		
+		$this->url = $params['serveripaddress'];
 
 		if (!isset($params['customfields']['vpsid'])) {
 			$this->log('Please create a vpsid custom field');
@@ -93,7 +95,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/info', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/info', $options);
 
         if ($result) {
             return $result;
@@ -114,7 +116,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/access', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/access', $options);
 
         if ($result) {
             return $result;
@@ -136,7 +138,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/admin-access', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/admin-access', $options);
 
         if ($result) {
             return $result;
@@ -156,7 +158,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/os', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/os', $options);
 
         if ($result) {
             return $result;
@@ -177,7 +179,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/active', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/active', $options);
 
         if ($result) {
             return true;
@@ -198,7 +200,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/inactive', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/inactive', $options);
 
         if ($result) {
             return true;
@@ -219,7 +221,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/delete', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/delete', $options);
 
         if ($result) {
             return true;
@@ -242,7 +244,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/install', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/install', $options);
 
         if ($result) {
             return true;
@@ -263,7 +265,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/start', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/start', $options);
 
         if ($result) {
             return true;
@@ -284,7 +286,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/stop', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/stop', $options);
 
         if ($result) {
             return true;
@@ -305,7 +307,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/restart', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/restart', $options);
 
         if ($result) {
             return true;
@@ -326,7 +328,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/reset-bandwidth', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/reset-bandwidth', $options);
 
         if ($result) {
             return true;
@@ -347,7 +349,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/server/ip', $options);
+        $result = $this->curlRequest($this->url . '/api/server/ip', $options);
 
         if ($result) {
             return $result->ips;
@@ -368,7 +370,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/user/info', $options);
+        $result = $this->curlRequest($this->url . '/api/user/info', $options);
 
         if ($result) {
             return $result->id;
@@ -395,7 +397,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/update', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/update', $options);
 
         if ($result) {
             return true;
@@ -418,7 +420,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/check', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/check', $options);
 
         if (!$result) {
             return false;
@@ -479,7 +481,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/vps/create', $options);
+        $result = $this->curlRequest($this->url . '/api/vps/create', $options);
 
 		if ($result) {
 			$this->createdIp = $result->ip;	
@@ -507,7 +509,7 @@ class Autovm
             CURLOPT_POSTFIELDS => http_build_query($data),
         ];
 
-        $result = $this->curlRequest($this->url . '/user/create', $options);
+        $result = $this->curlRequest($this->url . '/api/user/create', $options);
 
         if ($result) {
             return $result->id;
