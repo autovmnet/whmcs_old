@@ -26,14 +26,12 @@ class Autovm
 
 	public function __construct($params)
 	{
-		#$valid = preg_match('#(.*)\/api$#', $params['serverhostname']);
-
-		#if (!$valid) {
-		#	$this->log('Please fix the autovm server url from whmcs admin area');
-		#}
+		$this->url = $params['servername'];
 		
-		$this->url = $params['serveripaddress'];
-
+		if (!$this->url) {
+			$this->log('Please enter the AutoVM url in the name field of your server');	
+		}
+				
 		if (!isset($params['customfields']['vpsid'])) {
 			$this->log('Please create a vpsid custom field');
 		}
