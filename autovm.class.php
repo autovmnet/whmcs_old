@@ -26,10 +26,10 @@ class Autovm
 
 	public function __construct($params)
 	{
-		$this->url = $params['servername'];
+		$this->url = $params['serverhostname'];
 		
 		if (!$this->url) {
-			$this->log('Please enter the AutoVM url in the name field of your server');	
+			$this->log('Please enter the AutoVM url in the hostname field of your server');	
 		}
 				
 		if (!isset($params['customfields']['vpsid'])) {
